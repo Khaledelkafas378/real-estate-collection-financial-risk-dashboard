@@ -2,105 +2,222 @@
 
 ## Project Overview
 
-An enterprise-style Power BI dashboard designed to analyze real-estate sales, installment collections, outstanding balances, banking exposure, and project performance across 8 real-estate projects.
+An enterprise-grade Power BI dashboard designed to analyze real estate sales, installment collections, outstanding balances, and financial exposure across multiple projects.
 
-The solution transforms raw installment data into an interactive financial intelligence dashboard that enables management to monitor collection performance, outstanding exposure, sales activity, and project-level financial performance.
+The dashboard provides management with a unified view of sales performance, collection performance, project completion, cash exposure, and bank exposure.
 
 ---
 
 ## Business Problem
 
-Real-estate developers manage large volumes of sales and installment data across multiple projects, customers, units, payment schedules, and financial channels.
+Real estate developers need to monitor installment-based sales and collections across multiple projects and payment channels.
 
-Without a centralized analytical solution, it can be difficult to:
+The main challenges addressed by this project are:
 
-- Monitor collection performance
-- Track outstanding installments
-- Separate cash and bank exposure
-- Analyze collection trends over time
-- Compare project performance
-- Identify due but unpaid installments
-
-This project addresses these challenges through a centralized Power BI analytical solution.
+- Tracking sold units across projects
+- Monitoring collected and outstanding installment amounts
+- Identifying due but unpaid installments
+- Comparing Cash and Bank collections
+- Analyzing bank-wise financial exposure
+- Monitoring project completion
+- Analyzing collection performance over time
+- Providing a centralized management view across all projects
 
 ---
 
 ## Project Objectives
 
-The dashboard was designed to:
+The dashboard aims to:
 
 - Monitor total units and sold units
-- Analyze sales performance across projects
-- Track invoiced and collected amounts
-- Measure outstanding balances
-- Analyze Cash vs Bank exposure
-- Monitor collection performance over time
-- Analyze bank-level financial exposure
-- Track project completion
-- Support project-level financial analysis
-
----
-
-## Projects Covered
-
-The dashboard covers 8 real-estate projects:
-
-1. One Kattameya Compound
-2. Zahra North Coast
-3. Degla Landmark
-4. Skyline Katamya Compound
-5. Degla Palms 6 October Compound
-6. Lake Front 6
-7. Crystal Plaza Maadi Compound
-8. Rihana / Rayhanna Avenue
-
----
-
-## Data Transformation
-
-The raw project data was transformed using Power Query.
-
-Main transformation steps included:
-
-- Removing control rows
-- Unpivoting installment columns
-- Standardizing installment records
-- Creating `Installment State`
-- Adding `Project Name`
-- Combining the 8 project datasets
-- Creating dimension tables
-- Adding adopted total units
-- Preparing the data for analytical modeling
-
-### Installment Lifecycle
-
-Each installment is classified into one of three states:
-
-| State | Meaning |
-|---|---|
-| PAID | Installment has been paid |
-| DUE - NOT PAID | Installment is due but has not been paid |
-| NOT DUE | Installment is not currently due |
-
-This classification is used as the foundation for collection and outstanding calculations.
+- Measure sales percentage
+- Track invoiced amounts
+- Track collected amounts
+- Monitor outstanding balances
+- Analyze collection rates
+- Compare Cash vs Bank collections
+- Analyze bank-wise exposure
+- Monitor project completion
+- Analyze collection trends by date
+- Provide project-level financial insights
 
 ---
 
 ## Data Model
 
-The project uses a dimensional data model centered around a fact table.
+The project follows a dimensional modeling approach using:
 
-### Main Tables
+### Fact Table
 
 - `fact`
+
+Contains sales and installment-level transactional data.
+
+### Dimension Tables
+
 - `DimCustomer`
 - `DimUnit`
 - `DimDate`
 
-### Model Structure
+The model follows a star-schema structure with relationships between dimensions and the central fact table.
+
+---
+
+## Data Transformation
+
+Data preparation was performed using Power Query.
+
+Main transformation steps included:
+
+- Removing unnecessary source rows
+- Standardizing column names and data types
+- Unpivoting installment columns
+- Creating installment states
+- Combining the eight project datasets
+- Standardizing project names
+- Adding adopted total units
+- Creating customer and unit dimensions
+- Creating a dedicated date dimension
+- Handling null installment values
+- Preparing the final analytical model
+
+### Installment States
+
+The installment lifecycle is classified into:
+
+- `PAID`
+- `DUE - NOT PAID`
+- `NOT DUE`
+
+---
+
+## DAX Business Logic
+
+Key measures include:
+
+- Sold Count
+- Sold %
+- No of Units
+- Project Completion %
+- Issued Invoices
+- Collected Invoices
+- Outstanding Invoices
+- Collection Rate
+- Outstanding %
+- Invoiced Amount
+- Collected Amount
+- Outstanding Amount
+- Bank Collected Amount
+- Bank Outstanding
+- Bank Invoiced Amount
+- Bank Sold Units
+- Bank Sold %
+
+---
+
+## Dashboard Architecture
+
+The report contains:
+
+### Executive Pages
+
+- Home
+- Global Summary
+- Collection By Date Summary
+
+### Project Analysis
+
+The dashboard contains detailed analysis for 8 real estate projects.
+
+Each project includes:
+
+- Overall
+- Cash
+- Bank
+- Bank-Wise
+
+This provides a structured project-level financial analysis.
+
+---
+
+## Key Analytical Areas
+
+### Sales Performance
+
+Analysis of:
+
+- Total units
+- Sold units
+- Sales percentage
+- Unit prices
+
+### Collection Performance
+
+Analysis of:
+
+- Invoiced amounts
+- Collected amounts
+- Outstanding amounts
+- Collection rate
+
+### Financial Exposure
+
+Analysis of:
+
+- Cash outstanding
+- Bank outstanding
+- Bank-wise exposure
+
+### Time Analysis
+
+Analysis of:
+
+- Historical records
+- New records
+- Collections by date
+- Outstanding balances over time
+
+### Project Performance
+
+Analysis of:
+
+- Project completion
+- Sold units
+- Collection performance
+- Financial exposure
+
+---
+
+## Technologies Used
+
+- Power BI
+- Power Query
+- DAX
+- Excel
+- Dimensional Data Modeling
+- Data Visualization
+
+---
+
+## Dashboard Structure
 
 ```text
-             DimCustomer
-                  |
-                  |
-DimDate ------ fact ------ DimUnit
+Real Estate Collection & Financial Risk Dashboard
+│
+├── Home
+├── Global Summary
+├── Collection By Date Summary
+│
+├── Project 1
+│   ├── Overall
+│   ├── Cash
+│   ├── Bank
+│   └── Bank-Wise
+│
+├── Project 2
+│   ├── Overall
+│   ├── Cash
+│   ├── Bank
+│   └── Bank-Wise
+│
+└── ... 8 Projects
